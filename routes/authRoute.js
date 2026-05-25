@@ -6,3 +6,6 @@ import { register } from "../controllers/authController.js"
 const authRoute=express.Router()
 
 authRoute.post("/",register)
+
+
+export default authRoute
