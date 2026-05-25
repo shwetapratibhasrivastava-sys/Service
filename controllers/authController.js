@@ -7,12 +7,12 @@ export const register=async(req,res)=>{
         const {name,email,password}=req.body
         if(!name||!email||!password){
             return res.json ({
-                message:"All feilds are required"
+                message:"All fields are required"
             })
         }
-        const exisitingUser=await Auth.findOne({email})
-        if(exisitingUser){
-            res.json({message:"User already exists"})
+        const existingUser=await Auth.findOne({email})
+        if(existingUser){
+            return res.json({message:"User already exists"})
         }
 
         const hashedPassword=await bcrypt.hash(password,10)
@@ -44,9 +44,9 @@ try {
      return res.json({
         data:existingUser
      })
-    }
+    } 
 } catch (error) {
-    res.json(error.message)
+    return res.json({message:error.message})
 }
 
 
