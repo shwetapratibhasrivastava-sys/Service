@@ -25,3 +25,29 @@ export const register=async(req,res)=>{
         res.json(error.message) 
     }
 }
+
+
+export const login=async(req,res)=>{
+try {
+    const{email,password}=req.body
+    if(!email||!password){
+        return res.json({
+            message:"All fields are required"
+        })
+    }
+    const existingUser=await Auth.findOne({email})
+    if(!existingUser){
+        return res.json({message:"This email don't exists"})
+    }
+    const comparePassword=await bcrypt.compare(password,existingUser.password)
+    if(comparePassword){
+     return res.json({
+        data:existingUser
+     })
+    }
+} catch (error) {
+    res.json(error.message)
+}
+
+
+}
