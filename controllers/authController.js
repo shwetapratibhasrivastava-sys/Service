@@ -1,4 +1,5 @@
 import Auth from "../models/AuthModel.js";
+import bcrypt from "bcryptjs";
 
 
 export const register=async(req,res)=>{
