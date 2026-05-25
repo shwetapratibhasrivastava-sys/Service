@@ -50,18 +50,18 @@ export const getServiceById = async (req, res) => {
   }
 };
 
-export const updateService = async (req, res) => {
-  try {
-    const service = await Service.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
-    res.json({ message: "Service updated", data: service });
-  } catch (error) {
-    res.json(error.message);
-  }
-};
+// export const updateService = async (req, res) => {
+//   try {
+//     const service = await Service.findByIdAndUpdate(
+//       req.params.id,
+//       req.body,
+//       { new: true }
+//     );
+//     res.json({ message: "Service updated", data: service });
+//   } catch (error) {
+//     res.json(error.message);
+//   }
+// };
 
 export const deleteService = async (req, res) => {
   try {
@@ -71,3 +71,45 @@ export const deleteService = async (req, res) => {
     res.json(error.message);
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const updateService=async(req,res)=>{
+     try {
+      if (!name||!description||!provider){
+        return res.json({
+          message:"All fields are required"
+        })
+      }
+      
+      const service=await Service.findByIdAndUpdate(req.params.id,req.body,{
+        new:true
+      })
+      res.json({
+        message:"Service updated",
+        data:service
+      })
+      console.log("message",service)
+     } catch (error) {
+       req.json(error.message)
+     }
+
+}
+
+
+
