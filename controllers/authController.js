@@ -39,12 +39,17 @@ try {
     if(!existingUser){
         return res.json({message:"This email don't exists"})
     }
+    
     const comparePassword=await bcrypt.compare(password,existingUser.password)
     if(comparePassword){
      return res.json({
         data:existingUser
      })
-    } 
+    } else{
+         return res.json({
+        message:"Invalid password"
+     })
+    }
 } catch (error) {
     return res.json({message:error.message})
 }
