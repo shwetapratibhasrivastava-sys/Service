@@ -2,9 +2,9 @@ import Service from "../models/seviceModel.js";
 
 export const createService = async (req, res) => {
   try {
-    const { name, description, provider } = req.body;
+    const { name, description} = req.body;
 
-    if (!name || !description || !provider) {
+    if (!name || !description ) {
       return res.json({
         message: "All fields are required",
       });
@@ -19,7 +19,7 @@ export const createService = async (req, res) => {
       });
     }
 
-    const service = await Service.create({ name, description, provider });
+    const service = await Service.create({ name, description });
 
     res.status(200).json({
       message: "Service created successfully",
@@ -50,18 +50,7 @@ export const getServiceById = async (req, res) => {
   }
 };
 
-// export const updateService = async (req, res) => {
-//   try {
-//     const service = await Service.findByIdAndUpdate(
-//       req.params.id,
-//       req.body,
-//       { new: true }
-//     );
-//     res.json({ message: "Service updated", data: service });
-//   } catch (error) {
-//     res.json(error.message);
-//   }
-// };
+
 
 export const deleteService = async (req, res) => {
   try {
@@ -91,7 +80,7 @@ export const deleteService = async (req, res) => {
 
 export const updateService=async(req,res)=>{
      try {
-      if (!name||!description||!provider){
+      if (!name||!description){
         return res.json({
           message:"All fields are required"
         })
